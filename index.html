@@ -6,11 +6,12 @@
   
   <!-- Bootstrap File -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery.js"></script>
-  
+  <!-- Materialize CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!-- Animate CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 </head>
+
 <body>
   
   <!-- Overall Bootstrap Grid -->
@@ -21,11 +22,24 @@
       <h1 class="text-center"><strong>Search for a stay and to go out</strong></h1>
       <h4 class="text-center">We will show you what to do and where to stay by areas</h4>
       <hr>
-      <div class="text-center">
-        <h6>Search bars go here</h6>
-      </div>
-      
-    </div>
+      <div class="row">
+       <div class="col-lg-3">
+          <input id="date" type="date">        
+       </div>
+       <div class="col-lg-6 location-search">
+        <form>
+          <input type="text" name="search" placeholder="Search Austin Area">
+        </form>      
+       </div>
+       <div class="col-lg-3 event-search">
+          <form>
+            <input type="text" name="search" placeholder="Search Event">
+          </form>               
+        </div>
+       </div>
+       </div>
+
+
 
     <div class="row">
       
@@ -62,6 +76,19 @@
       
     </div>
   
-  
+    <!-- jQuery JS -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    
+    <!-- Code to the JavaScript Files -->
+    <!--Jordan's JS-->
+    <script src="assets/javascript/sinan.js"></script>
+    <!--Sinan's JS-->
+    <script src="assets/javascript/jordan.js"></script>
+    <!--Miguel's JS-->
+    <script src="assets/javascript/miguel.js"></script>
+    <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
+   
+   
+
 </body>
 </html>
