@@ -10,6 +10,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <!-- Animate CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+  <!-- MapQuest -->
+  <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.css"/>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+
 </head>
 
 <body>
@@ -19,8 +27,8 @@
     
     <!-- Jumbotron with Title -->
     <div class="jumbotron">
-      <h1 class="text-center"><strong>Search for a stay and to go out</strong></h1>
-      <h4 class="text-center">We will show you what to do and where to stay by areas</h4>
+      <h1 class="text-center"><strong>Search for events and map them</strong></h1>
+      <h4 class="text-center">We will show you what to do and where it's at</h4>
       <hr>
       <div class="row">
        <div class="col-lg-3">
@@ -41,38 +49,25 @@
 
 
 
-    <div class="row">
+    <div id="content" class="row">
       
       <!-- Left Panel -->
-      <div class="panel panel-default col-lg-3">
+      <div class="panel panel-default col-lg-5">
           <div class="panel-heading">
-            <h3 class="panel-title">Here goes HomeAway results integration</h3>
+            <h3 class="panel-title">Here goes TickeMaster results integration</h3>
           </div>
           <div class="panel-body">
-            HomeAway Results to be displayed (Limit 10 to start with)
+            TicketMaster results to be displayed (Limit 10 to start with)
           </div>
         </div>
       
       
-      <!-- Middle Panel-->
-      <div class="panel panel-default col-lg-6">
-          <div class="panel-heading">
-            <h3 class="panel-title">Here goes Google maps integration</h3>
+      <!-- Right Panel-->
+      <div class="col-lg-7">
           </div>
-          <div class="panel-body">
-            Display google maps
+          <div id="map" class="panel-body">
           </div>
         </div>
-        
-        <!-- Right Panel -->
-        <div class="panel panel-default col-lg-3">
-            <div class="panel-heading">
-              <h3 class="panel-title">Here goes Eventful results integration</h3>
-            </div>
-            <div class="panel-body">
-            Display Eventful results (Limit 10 to start with)
-            </div>
-          </div>
       
     </div>
   

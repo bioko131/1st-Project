@@ -42,3 +42,14 @@
 .location-search.input[type=text]:focus {
     width: 100%;
 }
+
+#map{
+    float: left;
+    height: 100%;
+    width: 58%;
+}
+
+#content{
+    height: 900px;
+    width: 100%;
+}
