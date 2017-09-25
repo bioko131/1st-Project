@@ -1,89 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Easy Search</title>
-  
-  <!-- Bootstrap File -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <!-- Materialize CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  <!-- Animate CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
-  <!-- MapQuest -->
-  <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.css"/>
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Search</title>
+    <!-- Bootstrap File -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Materialize CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- Animate CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
-  
-  <!-- Overall Bootstrap Grid -->
-  <div class="fluid-container">
-    
-    <!-- Jumbotron with Title -->
-    <div class="jumbotron">
-      <h1 class="text-center"><strong>Search for events and map them</strong></h1>
-      <h4 class="text-center">We will show you what to do and where it's at</h4>
-      <hr>
-      <div class="row">
-       <div class="col-lg-3">
-          <input id="date" type="date">        
-       </div>
-       <div class="col-lg-6 location-search">
-        <form>
-          <input type="text" name="search" placeholder="Search Austin Area">
-        </form>      
-       </div>
-       <div class="col-lg-3 event-search">
-          <form>
-            <input type="text" name="search" placeholder="Search Event">
-          </form>               
+    <!-- Overall Bootstrap Grid -->
+    <div class="fluid-container">
+        <!-- Jumbotron with Title -->
+        <div class="jumbotron">
+            <h1 class="text-center"><strong>Search for a stay and to go out</strong></h1>
+            <h4 class="text-center">We will show you what to do and where to stay by areas</h4>
+            <hr>
+            <div class="row">
+                <div class="col-lg-3">
+                    <input id="date" type="date">
+                </div>
+                <div class="col-lg-6 location-search">
+                    <lable for="google-input" type="text">
+                        <input type="text" name="search" placeholder="Search Austin Area" id="google-input">
+                        <input type="submit" vlaue="Search" id="google-searchButton">
+                    </lable>
+                </div>
+                <div class="col-lg-3 event-search">
+                    <form>
+                        <input type="text" name="search" placeholder="Search Event">
+                    </form>
+                </div>
+            </div>
         </div>
-       </div>
-       </div>
-
-
-
-    <div id="content" class="row">
-      
-      <!-- Left Panel -->
-      <div class="panel panel-default col-lg-5">
-          <div class="panel-heading">
-            <h3 class="panel-title">Here goes TickeMaster results integration</h3>
-          </div>
-          <div class="panel-body">
-            TicketMaster results to be displayed (Limit 10 to start with)
-          </div>
+        <div class="row">
+            <!-- Left Panel -->
+            <div class="panel panel-default col-lg-3">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Here goes HomeAway results integration</h3>
+                </div>
+                <div class="panel-body">
+                    HomeAway Results to be displayed (Limit 10 to start with)
+                </div>
+            </div>
+            <!-- Middle Panel-->
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Here goes Google maps integration</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="map" class="row"></div>
+                </div>
+            </div>
+            <!-- Right Panel -->
+            <div class="panel panel-default col-lg-3">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Here goes Eventful results integration</h3>
+                </div>
+                <div class="panel-body">
+                <div id="displayEvents"></div>
+                    Display Eventful results (Limit 10 to start with)
+                </div>
+            </div>
         </div>
-      
-      
-      <!-- Right Panel-->
-      <div class="col-lg-7">
-          </div>
-          <div id="map" class="panel-body">
-          </div>
-        </div>
-      
-    </div>
-  
-    <!-- jQuery JS -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    
-    <!-- Code to the JavaScript Files -->
-    <!--Jordan's JS-->
-    <script src="assets/javascript/sinan.js"></script>
-    <!--Sinan's JS-->
-    <script src="assets/javascript/jordan.js"></script>
-    <!--Miguel's JS-->
-    <script src="assets/javascript/miguel.js"></script>
-    <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
-   
-   
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKoSmUttDujO7wwdO9yVPltM-JmXgfNyA&libraries=places">
+        </script>
 
-</body>
+        <!-- jQuery JS -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Code to the JavaScript Files -->
+        <!--Jordan's JS-->
+        <script src="assets/javascript/sinan.js"></script>
+        <!--Sinan's JS-->
+        <script src="assets/javascript/jordan.js"></script>
+        <!--Miguel's JS-->
+        <script src="assets/javascript/miguel.js"></script>
+        <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
+       
+        </body>
+
 </html>

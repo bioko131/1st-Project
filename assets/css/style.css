@@ -1,4 +1,8 @@
-
+ #map {
+        margin: 0px;
+        padding: 0px;
+        height: 500px;
+      } 
 
 /*CSS for <div class="col-lg-3 event-search">*/
 
@@ -40,16 +44,5 @@
 }
 
 .location-search.input[type=text]:focus {
-    width: 100%;
-}
-
-#map{
-    float: left;
-    height: 100%;
-    width: 58%;
-}
-
-#content{
-    height: 900px;
     width: 100%;
 }
