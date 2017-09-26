@@ -27,3 +27,4 @@ var newResult = {
 // Pushing to Firebase	
 database.ref().push(newResult);
 	console.log(newResult);
+

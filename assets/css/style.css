@@ -1,8 +1,16 @@
 
+ #map {
+        margin: 0px;
+        padding: 0px;
+        height: 500px;
+      } 
+
+
 /*Jumbotron CSS modification*/
 .text-center {
     padding-top: 0px;
 }
+
 
 
 
@@ -53,16 +61,5 @@
 }
 
 .location-search.input[type=text]:focus {
-    width: 100%;
-}
-
-#map{
-    float: left;
-    height: 100%;
-    width: 58%;
-}
-
-#content{
-    height: 900px;
     width: 100%;
 }
