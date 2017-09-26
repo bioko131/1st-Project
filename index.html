@@ -1,5 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Easy Search</title>
+  
+  <!-- Bootstrap File -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+ 
+  <!-- Materialize CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!-- Animate CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+  <!-- MapQuest -->
+  <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.css"/>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +33,7 @@
 </head>
 
 <body>
+
     <!-- Overall Bootstrap Grid -->
     <div class="fluid-container">
         <!-- Jumbotron with Title -->
@@ -84,5 +104,110 @@
         <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
        
         </body>
+
+  
+  <!-- Overall Bootstrap Grid -->
+  <div class="fluid-container">
+    
+    <!-- Jumbotron with Title -->
+    <div class="jumbotron">
+      <h1 class="text-center"><strong>Search for events and map them</strong></h1>
+      <h4 class="text-center">We will show you what to do and where it's at</h4>
+      <hr>
+      <div class="row">
+       <div class="col-lg-3">
+          <input id="date" type="date">        
+       </div>
+       <div class="col-lg-6 location-search">
+        <form>
+          <input type="text" name="search" placeholder="Search Austin Area">
+        </form>
+        
+       </div>
+       <div class="col-lg-3 event-search">
+        <div class="form-group">
+          <label for="search">Keyword</label>
+          <div></div>
+          <input type="text" class="form-control" id="keyword-term">
+          <!--submit button for retrieving data-->
+        <button type="submit" class="btn btn-default" id="event-search"><i class="fa fa-search"></i> Search</button>
+        </div>
+        </div>              
+        </div>
+       </div>
+       </div>
+
+
+   
+    
+    <div class="row">
+      
+      <!-- Left Panel -->
+      <div class="panel panel-default col-lg-5">
+        
+        <div class="panel-heading">
+            <p>Ticketmaster logo goes here</p>
+        </div>
+        <div class="panel-body">
+          <p>test current coordinates location:</p>
+          <p id="location">test location here (this text will change once it loads)</p>
+        </div>
+        <div class="panel-body" id="events">
+
+    <div id="content" class="row">
+      
+      <!-- Left Panel -->
+      <div class="panel panel-default col-lg-5">
+          <div class="panel-heading">
+            <h3 class="panel-title">Here goes TickeMaster results integration</h3>
+          </div>
+          <div class="panel-body">
+            TicketMaster results to be displayed (Limit 10 to start with)
+          </div>
+
+        </div>
+      </div>
+      
+      
+      <!-- Right Panel-->
+      <div class="panel panel-default col-lg-7">
+          <div class="panel-heading">
+            <h3 class="panel-title">Here goes Google maps integration</h3>
+          </div>
+          <div class="panel-body">
+            
+          </div>
+        </div>
+        
+        
+        
+
+      <div class="col-lg-7">
+          </div>
+          <div id="map" class="panel-body">
+          </div>
+        </div>
+      
+    </div>
+
+    <div id="map"></div>
+    
+  
+    <!-- jQuery JS -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    
+    <!-- Code to the JavaScript Files -->
+    <!--Jordan's JS-->
+    <script src="assets/javascript/jordan.js"></script>
+    
+    <!--Sinan's JS-->
+    <script src="assets/javascript/sinan.js"></script>
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBz1j5js2rQj-jBMtTkGuLqcD_N6_C9B_Y&libraries=places"></script> -->
+    <!--Miguel's JS-->
+    <script src="assets/javascript/miguel.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVqlzEQE3v7I_cE60jGYcqCg0GkVD3gfI" async defer></script>
+   
+   
+
 
 </html>
