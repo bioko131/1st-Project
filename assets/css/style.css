@@ -31,12 +31,8 @@
 #map {
     width: 500px;
     height: 400px;
-  }-list {
-    width: 20%;
-    height: 100%;
-    float: right;
-    overflow: auto;
   }
+
 
 
 /*CSS for <div class="col-lg-6 location-search">*/

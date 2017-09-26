@@ -1,161 +1,155 @@
-/* EVDB JS API (EVDB.API) 0.4.1 / develop@eventful.com / 2016-01-22
+ // varibales for map  and markers 
 
-    See http://api.eventful.com/js/api.changes for a changelog.
-
-    Instructions:
-        - Include the EVDB JS API script in your HTML document like so:
-    <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
-        - Call the EVDB.API.call() function as specified below.
-
-    Format of API Call:
-
-        EVDB.API.call(sMethod, args, fnCallback);
-
-        - sMethod is the API method to call.
-            see: http://api.eventful.com/docs
-        - args is a string or object containing the arguments to pass to the API
-            - string: "x=1&y=2&z=3"
-            - object: {x: 1, y: 2, z:3}
-        - fnCallback is a reference to a function taking a single argument
-            - The only argument to the function will be the data passed back
-                from the API in JS data structures (objects, arrays, etc.).
-
-    Example:
-        var oArgs = {
-            app_key: [your api key],
-            q: "music in San Diego, CA",
-            page_size: 25
-        };
-        EVDB.API.call("/events/search", oArgs, function(oData)
-        {
-            // Note: this relies on the custom toString() methods below
-            // alert(oData.toString());
-        });
-
-        Object.prototype.toString = function()
-        {
-            var s = "{\n";
-            for (var x in this)
-            {
-                s += "\t" + x + ": " + this[x].toString() + "\n";
-            }
-            s += "}";
-            return s;
-        }
-        Array.prototype.toString = function()
-        {
-            return '[' + this.join(", ") + ']';
-        }
-*/
-
-if (window.EVDB === undefined) window.EVDB = {};
-if (EVDB.API === undefined) EVDB.API = {};
-
-EVDB.API.idRequest = 1;
-EVDB.API.requests = [];
-EVDB.API.elHead = null;
-
-var proto;  /* Either http or https if we can discover via the window.location.protocol field */
-if ( !(window === undefined || window.location === undefined || window.location.protocol === undefined )) {
-  proto = window.location.protocol;
-}
-if (proto === undefined || proto === '' || proto === ' ' || proto === 'file:' ) {
-  proto = 'http:';
-}
-
-EVDB.API.URL = proto + "//api.eventful.com/json";
-EVDB.API.version = 0.41;
-
-EVDB.API.call = function(sMethod, args, fnCallback)
-{
-  try {
-    // serialize args if necessary
-    if (typeof args == "object")
-    {
-      // add user-specific details to every call automatically if we have them
-      if (EVDB.API.app_key) args.app_key = EVDB.API.app_key;
-      if (EVDB.API.user) args.user = EVDB.API.user;
-      if (EVDB.API.user_key) args.user_key = EVDB.API.user_key;
-
-      args = EVDB.API._serialize(args);
-    }
-    else
-    {
-      // add user-specific details to every call automatically if we have them
-      var sUserArgs = '', oUserArgs = {};
-      if (EVDB.API.app_key) oUserArgs.app_key = EVDB.API.app_key;
-      if (EVDB.API.user) oUserArgs.user = EVDB.API.user;
-      if (EVDB.API.user_key) oUserArgs.user_key = EVDB.API.user_key;
-      args += (args.length ? '&' : '') + EVDB.API._serialize(oUserArgs);
-    }
-
-    // create the script element for the api call
-    var elScript = document.createElement("script");
-    elScript.type = "text/javascript";
-    elScript.src = EVDB.API.URL + sMethod +'?'+ args +"&json_request_id="+
-    EVDB.API.idRequest;
-
-    // add the call to the requests queue
-    EVDB.API.requests[EVDB.API.idRequest++] = {el: elScript, cb: fnCallback};
-
-    // append the script element to the dom (to fetch the data)
-    if (!EVDB.API.elHead)
-    {
-      EVDB.API.elHead = document.getElementsByTagName("head")[0];
-    }
-    EVDB.API.elHead.appendChild(elScript);
-
-  } catch(e) {
-      EVDB.API.error(e.toString());
-      return false;
-  }
-  return true;
-}
-EVDB.API.error = function(sText)
-{
-  var elDiv = document.createElement("div");
-  elDiv.appendChild(document.createTextNode(sText));
-  document.body.insertBefore(elDiv, document.body.firstChild);
-  elDiv.setAttribute("style", "margin:1em;padding:0.5em;border:2px dashed "+
-  "#ff9999;font-size:12px;color:red;");
-  return true;
-}
-EVDB.API._complete = function(idRequest, oData)
-{
-  var requestData = EVDB.API.requests[idRequest] || null;
-
-  if (requestData)
-  {
-    // if we have a valid callback
-    if (typeof requestData.cb == "function")
-    {
-      var fnCallback = requestData.cb;
-
-      // clean up the request
-      try { EVDB.API.elHead.removeChild(requestData.el); } catch (e) {}
-      EVDB.API.requests[idRequest] = null;
-
-      // fire the callback with the data
-      fnCallback(oData);
-      return true;
-    }
-    else
-    {
-      EVDB.API.error("Invalid callback function.");
-    }
-  }
-  else
-  {
-    EVDB.API.error("Invalid request id.");
-  }
-  return false;
-}
-EVDB.API._serialize = function(oFrom)
-{
-  var aTemp = [];
-  for (var i in oFrom)
-  {
-    aTemp.push(encodeURIComponent(i) +'='+ encodeURIComponent(oFrom[i]));
-  }
-  return aTemp.join('&');
-}
+ var map;
+ var markers = [];
+ 
+ //  Austin map 
+ 
+ function initialize() {
+     var austin = new google.maps.LatLng(30.307182,-97.755996 );
+ 
+     map = new google.maps.Map(document.getElementById('map'), {
+         center: new google.maps.LatLng(30.307182,-97.755996 ),
+         zoom: 10
+     });
+ 
+ 
+ 
+ 
+ 
+     service = new google.maps.places.PlacesService(map);
+ }
+ 
+ initialize()
+ 
+ 
+ // 
+ 
+ function callback(results, status) {
+     if (status == google.maps.places.PlacesServiceStatus.OK) {
+         for (var i = 0; i < results.length; i++) {
+             var place = results[i];
+               createMarker(results[i].geometry.location,);
+             console.log('inside call back ',results);
+         }
+ 
+     }
+ }
+ 
+ 
+ $("#google-searchButton").on("click", function() {
+     markers.forEach(function(marker) {
+         marker.setMap(null);
+     });
+     var request = {
+         location: new google.maps.LatLng(30.307182,-97.755996 ),
+         radius: '500',
+         query: $("#google-input").val().trim()
+     }
+     service.textSearch(request, callback);
+ });
+ 
+ function createMarker(location, data) {
+     var marker = new google.maps.Marker({
+         position: location,
+         map: map,
+         mapTypeId: 'terrain'
+     });
+     var infowindow = new google.maps.InfoWindow({
+       content:data
+     });
+   
+     if (data) { 
+         marker.addListener('click', function() {
+             infowindow.open(map, marker);
+         });
+     }
+  
+ 
+     markers.push(marker);
+ }
+ 
+ function getEventsByLocation(lat, lng) {
+     fetch(`https://galvanize-cors-proxy.herokuapp.com/https://api.eventful.com/json/events/search?app_key=FJj2tfhj2XNJM7Jb&location=${lat},${lng}&within=10`)
+         .then(a => a.json())
+         .then(function(response) {
+             response.events.event.forEach(function(event) {
+                 console.log('inside request to eventful',event)
+                 displayEvent(event.venue_name, event.title)
+ 
+                 createMarker({lat: parseFloat(event.latitude), lng: parseFloat(event.longitude)}, event.description)
+ 
+             })
+         })
+ }
+ 
+ var options = {
+     enableHighAccuracy: true,
+     timeout: 5000,
+     maximumAge: 0
+   };
+   
+   function success(pos) {
+     var crd = pos.coords;
+     console.log('inside success',crd)
+     getEventsByLocation(crd.latitude, crd.longitude)
+   };
+   
+   function error(err) {
+     console.warn(`ERROR(${err.code}): ${err.message}`);
+   };
+   
+   navigator.geolocation.getCurrentPosition(success, error, options);
+ 
+ 
+ 
+ 
+ //   function DisplayEvents(response){
+ //     response.events.event.forEach(function(event){
+ //         var eventDiv = $("<div>");
+ //         eventDiv.addClass("ClassEvent");
+ //         var eventName = $("<p>");
+ //         var eventImage = $("<img>").attr('src', );
+ //     })
+ 
+ // }
+ 
+   //   }
+   // }
+ 
+ 
+   function displayEvent (venue, title){
+     console.log('inside displayEvent', venue, title)
+     $("#displayEvents").append('<div id=eventDiv>' +
+      '<p>'+ venue + '</p>' +
+        '<p>'+ title + '</p></div><br/>');
+   }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
