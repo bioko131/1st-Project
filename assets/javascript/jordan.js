@@ -1,17 +1,29 @@
-// var getURL = "https://www.mapquestapi.com/geocoding/v1/batch?&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1&location=" + locOne + "&location=" + locTwo + "&location=" + locThree + "&location=" + locFour + "&location=" + locFive + "&location=" + locSix + "&location=" + locSeven + "&location=" + locEight + "&location=" + locNine + "&location=" + locTen + "&key=J1QaI4jjVKo2OqXJfOMydpJBrTudN95J";
+// Firebase INIT
+var config = {
+    apiKey: "AIzaSyDuLnrQSY0AwQnve9SeGKdvajKR1Cf4vT0",
+    authDomain: "mijosi-1505956805893.firebaseapp.com",
+    databaseURL: "https://mijosi-1505956805893.firebaseio.com",
+    projectId: "mijosi-1505956805893",
+    storageBucket: "mijosi-1505956805893.appspot.com",
+    messagingSenderId: "178421641746"
+};
+firebase.initializeApp(config);
 
-L.mapquest.key = 'J1QaI4jjVKo2OqXJfOMydpJBrTudN95J';
+// Database
+var database = firebase.database();
 
-// 'map' refers to a <div> element with the ID map
-L.mapquest.map('map', {
-    center: [30.283748, -97.725979],
-    layers: L.mapquest.tileLayer('map'),
-    zoom: 12
-});
+// Variables for grabbing search result info (venue, lat/lng, etc.)
+var venueName = $("#employee-name-input").val().trim();
+var venueLat = $("#role-input").val().trim();
+var venueLng = ($("#start-input").val().trim(), "DD/MM/YY").format("X");
 
-// Variables for lat/lng of TM search results
-var locOne = ""
+// Info for Search Results
+var newResult = {
+    venue: venueName,
+    lat: venueLat,
+    lng: venueLng,
+};
 
-// Function to drop pins for each result
-
-// Info/Picture on click/mouseover
+// Pushing to Firebase	
+database.ref().push(newResult);
+	console.log(newResult);
