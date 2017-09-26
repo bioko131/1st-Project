@@ -1,72 +1,184 @@
+// $(document).ready(function(){
+//Ticketmaster API DFUJxyXZDThL41qGAweQlOth8JI3vGsf
 
-//Eventful API key hQSxPV7TZCQgqHwx 
+// url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=DFUJxyXZDThL41qGAweQlOth8JI3vGsf&articles=tmus&region=40&days=1&category=1605&latlong="+latlon,
+// //var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=DFUJxyXZDThL41qGAweQlOth8JI3vGsf&keyword=music";
 
-var APIkeyEventful = "hQSxPV7TZCQgqHwx";
+//Array of categories to choose on the dropdown menu
+// var keyword = "";
+// var results = 0;
+// var when = 0;
+// var queryURL = 
 
-var category; //Category will alaways change according to the user selection on the dropdown menu
+// function getLocation() {
+//   if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(showPosition, showError);
+//   } else {
+//       var x = document.getElementById("location");
+//       x.innerHTML = "Geolocation is not supported by this browser.";
+//   }
+// }
+// function showPosition(position) {
+//   var x = document.getElementById("location");
+//   x.innerHTML = "Latitude: " + position.coords.latitude + 
+//   "<br>Longitude: " + position.coords.longitude; 
+//   var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-var location; //This always going to be Austin
 
-var time; //Time will always change according to the user selection on the dropdown menu
+//   $.ajax({
+//     type:"GET",
+//     url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&latlong="+latlon,
+//     async:true,
+//     dataType: "json",
+//     success: function(json) {
+               
+//                 //console logging
+//                 console.log(json);
+//                 // console.log(json._embedded.events[0]._embedded.venues[0].location);
+//                 // console.log(json._embedded.events[0]._embedded.venues[0].location.longitude);
+//                 // console.log(json._embedded.events[0]._embedded.venues[0].location.latitude);       
+//                 // console.log(queryURL);
+//                 var e = document.getElementById("events");
+//                 e.innerHTML = json.page.totalElements + " events found.";
+//                 showEvents(json);
+//                 initMap(position, json);
+//              },
+//     error: function(xhr, status, err) {
+//                 console.log(err);
+//              }
+//   });
 
-var queryEventfulURL = "http://eventful.com/events?q=" + category + "&l=" + location + "&t=" + time;
+// }
+
+// function showError(error) {
+//   switch(error.code) {
+//       case error.PERMISSION_DENIED:
+//           x.innerHTML = "User denied the request for Geolocation."
+//           break;
+//       case error.POSITION_UNAVAILABLE:
+//           x.innerHTML = "Location information is unavailable."
+//           break;
+//       case error.TIMEOUT:
+//           x.innerHTML = "The request to get user location timed out."
+//           break;
+//       case error.UNKNOWN_ERROR:
+//           x.innerHTML = "An unknown error occurred."
+//           break;
+//   }
+// }
+
+
+// function showEvents(json) {
+// for(var i=0; i<json.page.size; i++) {
+//   $("#events").append("<p>"+json._embedded.events[i].name+"</p>");
+// }
+// }
+
+// //I TRIED TO USED GOOGLE MAPS NOT DISPLAYING
+// function initMap(position, json) {
+// var mapDiv = document.getElementById('map');
+// var map = new google.maps.Map(mapDiv, {
+//   center: {lat: position.coords.latitude, lng: position.coords.longitude},
+//   zoom: 10
+// });
+// for(var i=0; i<json.page.size; i++) {
+//   addMarker(map, json._embedded.events[i]);
+// }
+// }
+
+// function addMarker(map, event) {
+// var marker = new google.maps.Marker({
+//   position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
+//   map: map
+// });
+// marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+// console.log(marker);
+// }
 
 
 
-function show_alert()
 
-{
+// getLocation();
 
-  var oArgs = {
+function getLocation() {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+      var x = document.getElementById("location");
+      x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  var x = document.getElementById("location");
+  x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+  
+  var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-            app_key:"hQSxPV7TZCQgqHwx",
+  $.ajax({
+    type:"GET",
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?dmaId=4&apikey=DFUJxyXZDThL41qGAweQlOth8JI3vGsf&latlong="+latlon,
+    async:true,
+    dataType: "json",
+    success: function(json) {
+                console.log(json);
+                var e = document.getElementById("events");
+                e.innerHTML = json.page.totalElements + " events found.";
+                showEvents(json);
+                initMap(position, json);
+             },
+    error: function(xhr, status, err) {
+                console.log(err);
+             }
+  });
+  
+}
 
-            id: "20218701",
+function showError(error) {
+  switch(error.code) {
+      case error.PERMISSION_DENIED:
+          x.innerHTML = "User denied the request for Geolocation."
+          break;
+      case error.POSITION_UNAVAILABLE:
+          x.innerHTML = "Location information is unavailable."
+          break;
+      case error.TIMEOUT:
+          x.innerHTML = "The request to get user location timed out."
+          break;
+      case error.UNKNOWN_ERROR:
+          x.innerHTML = "An unknown error occurred."
+          break;
+  }
+}
 
-            page_size: 25 ,
 
-  };
+function showEvents(json) {
+for(var i=0; i<json.page.size; i++) {
+  $("#events").append("<p>"+json._embedded.events[i].name+"</p>");
+}
+}
 
-  EVDB.API.call("/events/get", oArgs, function(oData) {
 
-      // Note: this relies on the custom toString() methods below
+function initMap(position, json) {
+var mapDiv = document.getElementById('map');
+var map = new google.maps.Map(mapDiv, {
+  center: {lat: position.coords.latitude, lng: position.coords.longitude},
+  zoom: 10
+});
+for(var i=0; i<json.page.size; i++) {
+  addMarker(map, json._embedded.events[i]);
+}
+}
 
-    });
-
+function addMarker(map, event) {
+var marker = new google.maps.Marker({
+  position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
+  map: map
+});
+marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+console.log(marker);
 }
 
 
 
-function show_alert2()
 
-{
-
-   var oArgs = {
-
-      app_key: "hQSxPV7TZCQgqHwx",
-
-      q: "music",
-
-      where: "San Diego", 
-
-      "date": "2013061000-2015062000",
-
-      page_size: 5,
-
-      sort_order: "popularity",
-
-   };
-
-   EVDB.API.call("/events/search", oArgs, function(oData) {
-
-      // Note: this relies on the custom toString() methods below
-
-    });
-
-}
-
-// Run Sample api searches <br><br>
-
-// <input type="button" onclick="show_alert()" value="Query #1 " /> <br>
-
-// <input type="button" onclick="show_alert2()" value="Query #2 " /> <br>
+getLocation();
