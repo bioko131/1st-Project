@@ -2,6 +2,17 @@
 
 var map;
 var markers = [];
+var userInput = "";
+
+
+function displayOutput() {
+    var input = $("userInput").value;
+    if (input.length === 0) {
+        alert("Please enter a valid input");
+        return;
+    }
+   document.getElementById("result").innerHTML = "You have entered " + input;
+}
 
 //  Austin map 
 
@@ -30,12 +41,13 @@ function callback(results, status) {
         for (var i = 0; i < results.length; i++) {
             var place = results[i];
               createMarker(results[i].geometry.location,);
-            console.log('inside call back ',results);
+            console.log('pins =  ',results);
         }
 
     }
 }
 
+navigator.geolocation.getCurrentPosition(success, error, options);
 
 $("#google-searchButton").on("click", function() {
     markers.forEach(function(marker) {
@@ -43,7 +55,7 @@ $("#google-searchButton").on("click", function() {
     });
     var request = {
         location: new google.maps.LatLng(30.307182,-97.755996 ),
-        radius: '500',
+        radius: '400',
         query: $("#google-input").val().trim()
     }
     service.textSearch(request, callback);
@@ -70,7 +82,7 @@ function createMarker(location, data) {
 }
 
 function getEventsByLocation(lat, lng) {
-    fetch(`https://galvanize-cors-proxy.herokuapp.com/https://api.eventful.com/json/events/search?app_key=FJj2tfhj2XNJM7Jb&location=${lat},${lng}&within=10`)
+    fetch(`https://galvanize-cors-proxy.herokuapp.com/https://api.eventful.com/json/events/search?app_key=FJj2tfhj2XNJM7Jb&all_day=1&keyword=concert&location=${lat},${lng}&within=10`)
         .then(a => a.json())
         .then(function(response) {
             response.events.event.forEach(function(event) {
@@ -125,6 +137,13 @@ var options = {
        '<p>'+ title + '</p></div><br/>');
   }
 
+  
+
+//   function eventsClick (){
+//       $("#eventDiv").on("click", function )
+//     console.log();
+// }
+
 
 
 
@@ -163,7 +182,7 @@ function initialize() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: new google.maps.LatLng(30.307182,-97.755996 ),
-        zoom: 12
+        zoom: 10,
     });
 
 
@@ -191,7 +210,7 @@ $("#google-searchButton").on("click", function() {
     });
     var request = {
         location: new google.maps.LatLng(30.307182,-97.755996 ),
-        radius: '500',
+        radius: '250',
         query: $("#google-input").val().trim()
     }
     service.textSearch(request, callback);
@@ -262,32 +281,34 @@ markers.push(marker);
 
 // Mapquest API
 
-// Firebase INIT
-var config = {
-    apiKey: "AIzaSyDuLnrQSY0AwQnve9SeGKdvajKR1Cf4vT0",
-    authDomain: "mijosi-1505956805893.firebaseapp.com",
-    databaseURL: "https://mijosi-1505956805893.firebaseio.com",
-    projectId: "mijosi-1505956805893",
-    storageBucket: "mijosi-1505956805893.appspot.com",
-    messagingSenderId: "178421641746"
-};
-firebase.initializeApp(config);
+// // Firebase INIT
+// var config = {
+//     apiKey: "AIzaSyDuLnrQSY0AwQnve9SeGKdvajKR1Cf4vT0",
+//     authDomain: "mijosi-1505956805893.firebaseapp.com",
+//     databaseURL: "https://mijosi-1505956805893.firebaseio.com",
+//     projectId: "mijosi-1505956805893",
+//     storageBucket: "mijosi-1505956805893.appspot.com",
+//     messagingSenderId: "178421641746"
+// };
+// firebase.initializeApp(config);
 
-// Database
-var database = firebase.database();
+// // Database
+// var database = firebase.database();
 
-// Variables for grabbing search result info (venue, lat/lng, etc.)
-var venueName = $("#employee-name-input").val().trim();
-var venueLat = $("#role-input").val().trim();
-var venueLng = ($("#start-input").val().trim(), "DD/MM/YY").format("X");
+// // Variables for grabbing search result info (venue, lat/lng, etc.)
+// var venueName = $("#employee-name-input").val().trim();
+// var venueLat = $("#role-input").val().trim();
+// var venueLng = ($("#start-input").val().trim(), "DD/MM/YY").format("X");
 
-// Info for Search Results
-var newResult = {
-    venue: venueName,
-    lat: venueLat,
-    lng: venueLng,
-};
+// // Info for Search Results
+// var newResult = {
+//     venue: venueName,
+//     lat: venueLat,
+//     lng: venueLng,
+// };
 
-// Pushing to Firebase	
-database.ref().push(newResult);
-	console.log(newResult);
+// // Pushing to Firebase	
+// database.ref().push(newResult);
+// 	console.log(newResult);
+
+

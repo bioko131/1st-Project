@@ -70,7 +70,7 @@
  }
  
  function getEventsByLocation(lat, lng) {
-     fetch(`https://galvanize-cors-proxy.herokuapp.com/https://api.eventful.com/json/events/search?app_key=FJj2tfhj2XNJM7Jb&location=${lat},${lng}&within=10`)
+     fetch(`https://galvanize-cors-proxy.herokuapp.com/https://api.eventful.com/json/events/search?app_key=FJj2tfhj2XNJM7Jb&q=happy+hour&all_day=1&location=${lat},${lng}&within=10`)
          .then(a => a.json())
          .then(function(response) {
              response.events.event.forEach(function(event) {
@@ -85,7 +85,7 @@
  
  var options = {
      enableHighAccuracy: true,
-     timeout: 5000,
+     timeout: 1000,
      maximumAge: 0
    };
    
@@ -102,35 +102,18 @@
    navigator.geolocation.getCurrentPosition(success, error, options);
  
  
- 
- 
- //   function DisplayEvents(response){
- //     response.events.event.forEach(function(event){
- //         var eventDiv = $("<div>");
- //         eventDiv.addClass("ClassEvent");
- //         var eventName = $("<p>");
- //         var eventImage = $("<img>").attr('src', );
- //     })
- 
- // }
- 
-   //   }
-   // }
- 
- 
    function displayEvent (venue, title){
      console.log('inside displayEvent', venue, title)
      $("#displayEvents").append('<div id=eventDiv>' +
       '<p>'+ venue + '</p>' +
-        '<p>'+ title + '</p></div><br/>');
+        '<p>'+ title + '</p></div><br/><hr>');
    }
  
  
  
  
  
- 
- 
+
  
  
  
