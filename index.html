@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Easy Search</title>
-  
-  <!-- Bootstrap File -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <!-- Materialize CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  <!-- Animate CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <meta charset="UTF-8">
+    <title>Do What?</title>
+    <!-- Bootstrap File -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Materialize CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- Animate CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <!--custom CSS CDN-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 </head>
 
 <body>
-  
-  <!-- Overall Bootstrap Grid -->
-  <div class="fluid-container">
-    
-    <!-- Jumbotron with Title -->
-    <div class="jumbotron">
-      <h1 class="text-center"><strong>Search for a stay and to go out</strong></h1>
-      <h4 class="text-center">We will show you what to do and where to stay by areas</h4>
-      <hr>
-      <div class="row">
-       <div class="col-lg-3">
-          <input id="date" type="date">        
-       </div>
-       <div class="col-lg-6 location-search">
-        <form>
-          <input type="text" name="search" placeholder="Search Austin Area">
-        </form>      
-       </div>
-       <div class="col-lg-3 event-search">
-          <form>
-            <input type="text" name="search" placeholder="Search Event">
-          </form>               
-        </div>
-       </div>
-       </div>
-
-
-
-    <div class="row">
-      
-      <!-- Left Panel -->
-      <div class="panel panel-default col-lg-3">
-          <div class="panel-heading">
-            <h3 class="panel-title">Here goes HomeAway results integration</h3>
-          </div>
-          <div class="panel-body">
-            HomeAway Results to be displayed (Limit 10 to start with)
-          </div>
-        </div>
-      
-      
-      <!-- Middle Panel-->
-      <div class="panel panel-default col-lg-6">
-          <div class="panel-heading">
-            <h3 class="panel-title">Here goes Google maps integration</h3>
-          </div>
-          <div class="panel-body">
-            Display google maps
-          </div>
-        </div>
+    <!-- Overall Bootstrap Grid -->
+    <div class="fluid-container">
         
-        <!-- Right Panel -->
-        <div class="panel panel-default col-lg-3">
-            <div class="panel-heading">
-              <h3 class="panel-title">Here goes Eventful results integration</h3>
-            </div>
-            <div class="panel-body">
-            Display Eventful results (Limit 10 to start with)
-            </div>
-          </div>
-      
-    </div>
-  
-    <!-- jQuery JS -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    
-    <!-- Code to the JavaScript Files -->
-    <!--Jordan's JS-->
-    <script src="assets/javascript/sinan.js"></script>
-    <!--Sinan's JS-->
-    <script src="assets/javascript/jordan.js"></script>
-    <!--Miguel's JS-->
-    <script src="assets/javascript/miguel.js"></script>
-    <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
-   
-   
+        <!-- Jumbotron with Title -->
+        <div class="jumbotron animated fadeInDown">
+            <!-- <h1 class="text-center"><strong>Search for a stay and to go out</strong></h1> -->
+            <h2 class="text-center">What is going on in Austin today?</h2>
 
-</body>
+            <div class="row">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-6 location-search">
+                    <lable for="google-input" type="text">
+                        <input type="text" name="search" placeholder="Search for an event" id="google-input">
+                        <input type="submit" value="Search" id="google-searchButton">
+                    </lable>
+                </div>
+                <div class="col-lg-3">   
+                </div>
+            </div>
+        </div>
+    
+
+        <div class="row">
+            
+            <!-- Left Panel -->
+            <div class="panel col-lg-3 animated fadeInLeft highlight">
+                <div class="panel-heading">
+                    <div class="eventful-badge eventful-large">
+                        <img src="http://api.eventful.com/images/powered/eventful_139x44.gif"
+                          alt="Local Events, Concerts, Tickets">
+                        <p><a href="http://eventful.com/">Events</a> by Eventful</p>
+                      </div>
+                </div>
+                <div class="panel-body animated shake">
+                <div id="displayEvents"></div>
+                </div>
+            </div>
+
+            <!-- Middle Panel-->
+            <div class="col-lg-6 animated fadeInUp">
+                
+                <div id="map" class="row"></div>
+                
+            </div>
+            
+            <!-- Right Panel -->
+            <div class="panel col-lg-3 animated fadeInRight">
+                <div class="panel-heading">
+                    <div class="eventful-badge eventful-large">
+                        <img src="http://api.eventful.com/images/powered/eventful_139x44.gif"
+                          alt="Local Events, Concerts, Tickets">
+                        <p>Description<a href="http://eventful.com/"> Events</a> by Eventful</p>
+                      </div>
+                </div>
+                <div class="panel-body">
+                    <div id="displayGoogle"></div>
+                </div>
+            </div>
+        </div>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKoSmUttDujO7wwdO9yVPltM-JmXgfNyA&libraries=places">
+        </script>
+
+        <!-- jQuery JS -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Code to the JavaScript Files -->
+        <!--Sinan's JS-->
+        <script src="assets/javascript/sinan.js"></script>
+        <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
+       
+        </body>
+
 </html>

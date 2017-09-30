@@ -1,4 +1,38 @@
+.jumbotron {
 
+    background-color: #3BCCD2;
+    color: white;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 300%;
+}
+
+
+#google-searchButton {
+    color: black;
+}
+
+.row {
+    margin-top: 0;
+}
+
+/*Jumbotron CSS modification*/
+.text-center {
+    padding-top: 0px;
+}
+
+.panel {
+    animation-duration: 3.5s;
+    
+    
+}
+
+@font-face {
+    font-family: MyHelvetica;
+    src: local("Helvetica Neue Bold"),
+         local("HelveticaNeue-Bold"),
+         url(Champions-Bold);
+    font-weight: bold;
+  }
 
 /*CSS for <div class="col-lg-3 event-search">*/
 
@@ -20,6 +54,13 @@
 .event-search.input[type=text]:focus {
     width: 100%;
 }
+
+/*GOOGLE MAPS*/
+#map {
+    width: 100%;
+    height: 400px;
+  }
+
 
 
 /*CSS for <div class="col-lg-6 location-search">*/
