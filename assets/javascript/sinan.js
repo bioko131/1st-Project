@@ -118,7 +118,9 @@ var options = {
   function displayEvent (venue,title){
     // for ()
     console.log('inside displayEvent',event)
-    $("#displayEvent").prepend('<div id=eventDiv>' +
+    $("#displayEvents").prepend('<div id=eventDiv>' +
       '<button id=onClickEvent>' +'<p>'+ title + '</p>' +
        '<p>'+ name + '</p></div><br/>');
   }
+
+  $("#google-searchButton").on("click", displayEvents());
