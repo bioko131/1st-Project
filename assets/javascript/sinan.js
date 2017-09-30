@@ -78,7 +78,7 @@ function createMarker(location, data) {
 }
 
 function getEventsByLocation(lat, lng) {
-    fetch(`https://galvanize-cors-proxy.herokuapp.com/https://api.eventful.com/json/events/search?app_key=FJj2tfhj2XNJM7Jb&location=${lat},${lng}&within=10`)
+    fetch(`https://galvanize-cors-proxy.herokuapp.com/https://api.eventful.com/json/events/search?app_key=FJj2tfhj2XNJM7Jb&location=${lat},${lng}&limit=10&within=10`)
         .then(a => a.json())
         .then(function(response) {
             response.events.event.forEach(function(event) {
