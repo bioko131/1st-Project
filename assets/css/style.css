@@ -1,3 +1,5 @@
+
+
 .jumbotron {
 
     background-color: #3BCCD2;
@@ -18,6 +20,7 @@
 /*Jumbotron CSS modification*/
 .text-center {
     padding-top: 0px;
+    font-size: 135%;
 }
 
 .panel {
@@ -61,7 +64,14 @@
     height: 400px;
   }
 
+.leftleft {
+    float:right;
+}
 
+#google-input{
+    font-size: 55%;
+
+}
 
 /*CSS for <div class="col-lg-6 location-search">*/
 .location-search.input[type=text] {
